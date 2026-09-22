@@ -81,7 +81,7 @@ function CreationDetail() {
             <p className="section-kicker">{creation.category} · Made to order</p>
             <h1 className="mt-3 font-display text-5xl font-light leading-[0.98] sm:text-7xl">{creation.name}</h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground">{creation.intro}</p>
-            <Button asChild size="lg" className="mt-8"><Link to="/contact">Start an enquiry <ArrowUpRight /></Link></Button>
+            <Button asChild variant="tactile" size="lg" className="mt-8"><Link to="/contact">Start an enquiry <ArrowUpRight className="size-5" /></Link></Button>
           </div>
         </div>
       </section>
