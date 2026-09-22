@@ -4,7 +4,7 @@ import { CreationCard } from "@/components/creation-card";
 import { Button } from "@/components/ui/button";
 import { categories, creations } from "@/lib/creations";
 
-export const Route = createFileRoute("/creations")({
+export const Route = createFileRoute("/creations/")({
   head: () => ({ meta: [
     { title: "Custom Creations | thaddeus creates" },
     { name: "description", content: "Browse custom resin frames, name keychains, celebration thalis, handmade cards and satin bouquets." },
