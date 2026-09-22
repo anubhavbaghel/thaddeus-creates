@@ -101,7 +101,7 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div id="mobile-menu" className="fixed inset-x-0 bottom-0 top-[4.75rem] z-40 overflow-y-auto bg-background md:hidden">
+        <div id="mobile-menu" className="absolute inset-x-0 top-full z-40 h-[calc(100dvh-4.75rem)] overflow-y-auto border-t border-border bg-background md:hidden">
           <nav className="mx-auto flex min-h-full max-w-lg flex-col px-6 pb-8 pt-7" aria-label="Mobile navigation">
             <div className="flex items-center justify-between border-b border-border pb-4">
               <span className="section-kicker">Menu</span>
