@@ -144,7 +144,7 @@ function CreationDetail() {
           <div>
             <p className="section-kicker">Ready when you are</p>
             <p className="mt-4 max-w-sm leading-7 text-muted-foreground">Share the occasion, the date and any photos you would like included, and the design can be planned around them.</p>
-            <Button asChild className="mt-6"><Link to="/contact">Enquire about this piece <ArrowUpRight /></Link></Button>
+            <Button asChild variant="tactile" size="lg" className="mt-6"><Link to="/contact">Enquire about this piece <ArrowUpRight className="size-5" /></Link></Button>
           </div>
           <div>
             <p className="section-kicker">You may also like</p>
