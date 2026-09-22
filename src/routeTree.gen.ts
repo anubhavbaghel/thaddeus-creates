@@ -10,33 +10,93 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CreationsRouteImport } from './routes/creations'
+import { Route as CreationsIndexRouteImport } from './routes/creations.index'
+import { Route as CreationsSlugRouteImport } from './routes/creations.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreationsRoute = CreationsRouteImport.update({
+  id: '/creations',
+  path: '/creations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreationsIndexRoute = CreationsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CreationsRoute,
+} as any)
+const CreationsSlugRoute = CreationsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => CreationsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/creations': typeof CreationsRouteWithChildren
+  '/creations/$slug': typeof CreationsSlugRoute
+  '/creations/': typeof CreationsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/creations/$slug': typeof CreationsSlugRoute
+  '/creations': typeof CreationsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/creations': typeof CreationsRouteWithChildren
+  '/creations/$slug': typeof CreationsSlugRoute
+  '/creations/': typeof CreationsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/creations'
+    | '/creations/$slug'
+    | '/creations/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/about' | '/contact' | '/creations/$slug' | '/creations'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/creations'
+    | '/creations/$slug'
+    | '/creations/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  CreationsRoute: typeof CreationsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +108,63 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/creations': {
+      id: '/creations'
+      path: '/creations'
+      fullPath: '/creations'
+      preLoaderRoute: typeof CreationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/creations/': {
+      id: '/creations/'
+      path: '/'
+      fullPath: '/creations/'
+      preLoaderRoute: typeof CreationsIndexRouteImport
+      parentRoute: typeof CreationsRoute
+    }
+    '/creations/$slug': {
+      id: '/creations/$slug'
+      path: '/$slug'
+      fullPath: '/creations/$slug'
+      preLoaderRoute: typeof CreationsSlugRouteImport
+      parentRoute: typeof CreationsRoute
+    }
   }
 }
 
+interface CreationsRouteChildren {
+  CreationsSlugRoute: typeof CreationsSlugRoute
+  CreationsIndexRoute: typeof CreationsIndexRoute
+}
+
+const CreationsRouteChildren: CreationsRouteChildren = {
+  CreationsSlugRoute: CreationsSlugRoute,
+  CreationsIndexRoute: CreationsIndexRoute,
+}
+
+const CreationsRouteWithChildren = CreationsRoute._addFileChildren(
+  CreationsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  CreationsRoute: CreationsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
