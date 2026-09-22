@@ -102,9 +102,9 @@ export function HomeSocialProof() {
                 Real pieces, real little details.
               </h2>
             </div>
-            <Button asChild variant="outline" size="lg">
+<Button asChild variant="tactile-ink" size="lg">
               <a href={instagramUrl} target="_blank" rel="noreferrer">
-                <Instagram /> Follow on Instagram
+                <Instagram className="size-5" /> Follow on Instagram
               </a>
             </Button>
           </div>
