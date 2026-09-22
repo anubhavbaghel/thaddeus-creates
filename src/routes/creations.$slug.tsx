@@ -114,8 +114,8 @@ function CreationDetail() {
             <p className="section-kicker">How it is made</p>
             <ol className="mt-6 grid gap-6">
               {creation.process.map((step, index) => (
-                <li key={step.title} className="flex gap-4">
-                  <span className="grid size-8 shrink-0 place-items-center rounded-md bg-primary/20 font-display text-sm font-medium">{index + 1}</span>
+                <li key={step.title} className="flex gap-4 sm:gap-5">
+                  <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-primary/20 font-display text-2xl font-light leading-none text-primary sm:size-14 sm:text-3xl">{index + 1}</span>
                   <div><h3 className="font-display text-xl font-medium">{step.title}</h3><p className="mt-1 text-sm leading-6 text-muted-foreground">{step.text}</p></div>
                 </li>
               ))}
