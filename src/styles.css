@@ -59,12 +59,12 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-display: "Syne", sans-serif;
+  --font-display: "Urbanist", sans-serif;
   --font-sans: "Plus Jakarta Sans", sans-serif;
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 0.5rem;
   --background: oklch(0.98 0.015 42);
   --foreground: oklch(0.39 0.055 336);
   --card: oklch(0.995 0.006 40);
@@ -151,14 +151,14 @@
 }
 
 @utility section-kicker { font-size: .75rem; line-height: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: .16em; color: var(--color-muted-foreground); }
-@utility ink-swish { position: relative; display: inline; z-index: 0; &::after { content: ""; position: absolute; z-index: -1; left: -.03em; right: -.02em; bottom: .05em; height: .22em; border-radius: 999px; background: var(--color-primary); transform: rotate(-1.5deg); } }
+@utility ink-swish { position: relative; display: inline; z-index: 0; &::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; bottom: .04em; height: .1em; background: var(--color-primary); transform: rotate(-.5deg); } }
 @utility hero-frame { overflow: hidden; border-radius: 1.1rem 4.5rem 1.1rem 1.1rem; box-shadow: .7rem .7rem 0 var(--color-secondary); }
 @utility bento-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); grid-template-areas: "resin paper" "resin bouquet" "key thali"; gap: .75rem; @media (min-width: 768px) { grid-template-columns: 1.15fr 1fr .8fr; grid-template-rows: 17rem 11rem; grid-template-areas: "resin paper bouquet" "resin key thali"; gap: 1rem; } }
 @utility tile { position: relative; min-height: 13rem; overflow: hidden; border-radius: var(--radius-lg); background: var(--color-muted); & > img { width: 100%; height: 100%; object-fit: cover; transition: transform 550ms cubic-bezier(.2,.8,.2,1); } &:hover > img { transform: scale(1.025); } }
 @utility tile-resin { grid-area: resin; min-height: 27rem; }
 @utility tile-paper { grid-area: paper; }
 @utility tile-bouquet { grid-area: bouquet; }
-@utility tile-label { position: absolute; left: .65rem; right: .65rem; bottom: .65rem; display: flex; align-items: center; justify-content: space-between; gap: .5rem; border-radius: .6rem; background: color-mix(in oklab, var(--color-background) 92%, transparent); padding: .7rem .8rem; backdrop-filter: blur(8px); & span { font-size: .65rem; font-weight: 700; color: var(--color-muted-foreground); } & h3 { font-family: var(--font-display); font-size: .82rem; line-height: 1; font-weight: 700; } }
+@utility tile-label { position: absolute; left: .65rem; right: .65rem; bottom: .65rem; display: flex; align-items: center; justify-content: space-between; gap: .5rem; border-radius: .4rem; background: color-mix(in oklab, var(--color-background) 92%, transparent); padding: .7rem .8rem; backdrop-filter: blur(8px); & span { font-size: .65rem; font-weight: 700; color: var(--color-muted-foreground); } & h3 { font-family: var(--font-display); font-size: .9rem; line-height: 1; font-weight: 500; } }
 @utility mini-tile { min-height: 9rem; display: flex; flex-direction: column; justify-content: space-between; border-radius: var(--radius-lg); padding: 1rem; & .mini-icon { font-family: var(--font-display); font-size: 2rem; font-weight: 800; } & div > span { font-size: .65rem; font-weight: 700; opacity: .55; } & h3 { margin-top: .2rem; font-family: var(--font-display); font-size: .9rem; line-height: 1.1; font-weight: 700; } &:nth-of-type(4) { grid-area: key; } &:nth-of-type(5) { grid-area: thali; } }
 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
