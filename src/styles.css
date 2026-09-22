@@ -59,29 +59,31 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --font-display: "Syne", sans-serif;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --radius: 0.75rem;
+  --background: oklch(0.98 0.015 42);
+  --foreground: oklch(0.39 0.055 336);
+  --card: oklch(0.995 0.006 40);
+  --card-foreground: oklch(0.39 0.055 336);
+  --popover: oklch(0.995 0.006 40);
+  --popover-foreground: oklch(0.39 0.055 336);
+  --primary: oklch(0.77 0.09 353);
+  --primary-foreground: oklch(0.31 0.045 335);
+  --secondary: oklch(0.84 0.065 135);
+  --secondary-foreground: oklch(0.32 0.04 140);
+  --muted: oklch(0.94 0.02 40);
+  --muted-foreground: oklch(0.54 0.035 335);
+  --accent: oklch(0.91 0.055 137);
+  --accent-foreground: oklch(0.34 0.04 140);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --border: oklch(0.86 0.026 340);
+  --input: oklch(0.86 0.026 340);
+  --ring: oklch(0.67 0.1 350);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -140,5 +142,23 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    letter-spacing: 0;
+    margin: 0;
   }
+
+  html { scroll-behavior: smooth; }
 }
+
+@utility section-kicker { font-size: .75rem; line-height: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: .16em; color: var(--color-muted-foreground); }
+@utility ink-swish { position: relative; display: inline; z-index: 0; &::after { content: ""; position: absolute; z-index: -1; left: -.03em; right: -.02em; bottom: .05em; height: .22em; border-radius: 999px; background: var(--color-primary); transform: rotate(-1.5deg); } }
+@utility hero-frame { overflow: hidden; border-radius: 1.1rem 4.5rem 1.1rem 1.1rem; box-shadow: .7rem .7rem 0 var(--color-secondary); }
+@utility bento-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); grid-template-areas: "resin paper" "resin bouquet" "key thali"; gap: .75rem; @media (min-width: 768px) { grid-template-columns: 1.15fr 1fr .8fr; grid-template-rows: 17rem 11rem; grid-template-areas: "resin paper bouquet" "resin key thali"; gap: 1rem; } }
+@utility tile { position: relative; min-height: 13rem; overflow: hidden; border-radius: var(--radius-lg); background: var(--color-muted); & > img { width: 100%; height: 100%; object-fit: cover; transition: transform 550ms cubic-bezier(.2,.8,.2,1); } &:hover > img { transform: scale(1.025); } }
+@utility tile-resin { grid-area: resin; min-height: 27rem; }
+@utility tile-paper { grid-area: paper; }
+@utility tile-bouquet { grid-area: bouquet; }
+@utility tile-label { position: absolute; left: .65rem; right: .65rem; bottom: .65rem; display: flex; align-items: center; justify-content: space-between; gap: .5rem; border-radius: .6rem; background: color-mix(in oklab, var(--color-background) 92%, transparent); padding: .7rem .8rem; backdrop-filter: blur(8px); & span { font-size: .65rem; font-weight: 700; color: var(--color-muted-foreground); } & h3 { font-family: var(--font-display); font-size: .82rem; line-height: 1; font-weight: 700; } }
+@utility mini-tile { min-height: 9rem; display: flex; flex-direction: column; justify-content: space-between; border-radius: var(--radius-lg); padding: 1rem; & .mini-icon { font-family: var(--font-display); font-size: 2rem; font-weight: 800; } & div > span { font-size: .65rem; font-weight: 700; opacity: .55; } & h3 { margin-top: .2rem; font-family: var(--font-display); font-size: .9rem; line-height: 1.1; font-weight: 700; } &:nth-of-type(4) { grid-area: key; } &:nth-of-type(5) { grid-area: thali; } }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
