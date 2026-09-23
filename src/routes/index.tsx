@@ -3,8 +3,8 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HomeSocialProof } from "@/components/home-social-proof";
 import { RealWorkCarousel } from "@/components/real-work-carousel";
+import { HeroWorkStack } from "@/components/hero-work-stack";
 import { creations } from "@/lib/creations";
-import heroImage from "../assets/thaddeus-hero.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
@@ -22,7 +22,7 @@ function HomePage() {
       <section className="mx-auto max-w-7xl px-5 pb-16 pt-10 sm:px-8 sm:pt-14 lg:px-12 lg:pb-24">
         <div className="grid items-end gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:gap-14">
           <div className="relative z-10 pb-2"><p className="section-kicker flex items-center gap-2"><span className="size-2 rounded-full bg-primary" /> Handmade, one at a time</p><h1 className="mt-6 max-w-[10ch] font-display text-[clamp(3.5rem,11vw,6.8rem)] font-light leading-[0.91]">Little things, made <span className="ink-swish">all yours.</span></h1><p className="mt-7 max-w-md text-base leading-7 text-muted-foreground sm:text-lg">Resin, paper and satin keepsakes shaped around your people, your stories and your happiest days.</p><Button asChild variant="tactile" size="xl" className="mt-8"><Link to="/creations">Browse the makes <ArrowUpRight className="size-5" /></Link></Button></div>
-          <div className="hero-frame relative"><span className="absolute -left-3 top-8 z-10 -rotate-3 rounded-sm bg-accent px-3 py-2 text-xs font-semibold shadow-sm sm:-left-6 sm:text-sm">made from memories</span><img src={heroImage} alt="A collection of custom resin, paper and floral gifts" width={1600} height={1104} fetchPriority="high" className="aspect-[1.22/1] w-full object-cover" /></div>
+          <HeroWorkStack />
         </div>
       </section>
 
