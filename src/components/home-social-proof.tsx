@@ -1,5 +1,4 @@
-import { Instagram, MessageCircleMore, Quote } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { MessageCircleMore, Quote } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -13,8 +12,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-
-const instagramUrl = "https://www.instagram.com/thaddeus_creates/";
 
 const reviewPlaceholders = [
   { number: "01", prompt: "Add a customer’s words about their custom piece here." },
@@ -90,43 +87,6 @@ export function HomeSocialProof() {
               <CarouselNext className="static translate-x-0 translate-y-0 rounded-md" />
             </div>
           </Carousel>
-        </div>
-      </section>
-
-      <section className="px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-            <div>
-              <p className="section-kicker">Fresh from the studio</p>
-              <h2 className="mt-3 max-w-[12ch] font-display text-4xl font-light leading-[1.02] sm:text-6xl">
-                Real pieces, real little details.
-              </h2>
-            </div>
-<Button asChild variant="tactile-ink" size="lg">
-              <a href={instagramUrl} target="_blank" rel="noreferrer">
-                <Instagram className="size-5" /> Follow on Instagram
-              </a>
-            </Button>
-          </div>
-
-          <div className="mt-10 grid min-h-80 place-items-center rounded-lg border border-dashed border-border bg-muted px-6 py-16 text-center">
-            <div className="max-w-md">
-              <Instagram className="mx-auto size-8 text-primary" aria-hidden="true" />
-              <h3 className="mt-5 font-display text-2xl font-medium">Studio gallery coming together</h3>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                Original work photographs will appear here once they are added. Until then, visit
-                Instagram for the latest makes.
-              </p>
-              <a
-                href={instagramUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-foreground underline decoration-primary decoration-2 underline-offset-4"
-              >
-                @thaddeus_creates <Instagram className="size-4" />
-              </a>
-            </div>
-          </div>
         </div>
       </section>
 

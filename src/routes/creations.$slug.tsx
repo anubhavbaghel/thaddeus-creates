@@ -2,7 +2,9 @@ import { Link, createFileRoute, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { RealWorkCarousel } from "@/components/real-work-carousel";
 import { creations, getCreation } from "@/lib/creations";
+import { realWork } from "@/lib/real-work";
 
 const SITE = "https://thaddeus-creates.lovable.app";
 
@@ -71,6 +73,8 @@ export const Route = createFileRoute("/creations/$slug")({
 function CreationDetail() {
   const creation = Route.useLoaderData();
   const related = creations.filter((item) => item.slug !== creation.slug).slice(0, 2);
+  const matchingWork = realWork.filter((item) => item.category === creation.category);
+  const galleryItems = matchingWork.length > 0 ? matchingWork : realWork;
   return (
     <main>
       <section className="mx-auto max-w-7xl px-5 pb-16 pt-8 sm:px-8 lg:px-12 lg:pb-24">
@@ -100,6 +104,8 @@ function CreationDetail() {
           </div>
         </div>
       </section>
+
+      <RealWorkCarousel items={galleryItems} compact />
 
       <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20 lg:px-12">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
