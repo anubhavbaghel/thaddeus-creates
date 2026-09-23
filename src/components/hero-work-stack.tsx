@@ -15,17 +15,27 @@ const cardPositions = [
 export function HeroWorkStack() {
   const [frontIndex, setFrontIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isCycling, setIsCycling] = useState(false);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (isPaused || reducedMotion.matches || heroWork.length < 2) return;
+    if (isPaused || isCycling || reducedMotion.matches || heroWork.length < 2) return;
 
-    const timer = window.setInterval(() => {
-      setFrontIndex((current) => (current + 1) % heroWork.length);
-    }, 3800);
+    const timer = window.setTimeout(() => setIsCycling(true), 3200);
 
     return () => window.clearInterval(timer);
-  }, [isPaused]);
+  }, [frontIndex, isCycling, isPaused]);
+
+  useEffect(() => {
+    if (!isCycling) return;
+
+    const timer = window.setTimeout(() => {
+      setFrontIndex((current) => (current + 1) % heroWork.length);
+      setIsCycling(false);
+    }, 1100);
+
+    return () => window.clearTimeout(timer);
+  }, [isCycling]);
 
   return (
     <div
@@ -43,10 +53,14 @@ export function HeroWorkStack() {
 
       {heroWork.map((item, imageIndex) => {
         const position = (imageIndex - frontIndex + heroWork.length) % heroWork.length;
+        const movingTo = isCycling && position > 0 ? position - 1 : position;
+        const motionClass = isCycling && position === 0
+          ? "hero-card-to-back z-50"
+          : cardPositions[movingTo];
         return (
           <div
             key={item.src}
-            className={`absolute inset-0 origin-bottom-left overflow-hidden bg-muted transition-[transform,opacity] duration-1000 ease-[cubic-bezier(.22,.8,.22,1)] motion-reduce:transition-none ${cardPositions[position]}`}
+            className={`absolute inset-0 origin-bottom-left overflow-hidden bg-muted transition-[transform,opacity] duration-1000 ease-[cubic-bezier(.22,.8,.22,1)] motion-reduce:transition-none ${motionClass}`}
             aria-hidden={position !== 0}
           >
             <img
