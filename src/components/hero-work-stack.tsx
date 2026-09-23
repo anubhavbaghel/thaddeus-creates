@@ -56,34 +56,35 @@ export function HeroWorkStack() {
         tabIndex={0}
       >
         {heroWork.map((item, imageIndex) => {
-        const isActive = imageIndex === frontIndex;
-        return (
-          <div
-            key={item.src}
-            className={`absolute inset-0 origin-bottom-left overflow-hidden bg-muted transition-opacity duration-700 ease-[cubic-bezier(.4,0,.2,1)] motion-reduce:transition-none ${cardPositions[imageIndex]} ${isActive ? "opacity-100" : "opacity-35"}`}
-            style={{ zIndex: isActive ? 50 : baseZIndexes[imageIndex] }}
-            aria-hidden={!isActive}
-          >
-            <img
-              src={item.src}
-              alt={isActive ? item.alt : ""}
-              width={768}
-              height={1024}
-              fetchPriority={imageIndex === 0 ? "high" : "auto"}
-              loading={imageIndex === 0 ? "eager" : "lazy"}
-              className="size-full object-cover"
-            />
-          </div>
-        );
-      })}
+          const isActive = imageIndex === frontIndex;
+          return (
+            <div
+              key={item.src}
+              className={`absolute inset-0 origin-bottom-left overflow-hidden bg-muted transition-opacity duration-700 ease-[cubic-bezier(.4,0,.2,1)] motion-reduce:transition-none ${cardPositions[imageIndex]} ${isActive ? "opacity-100" : "opacity-35"}`}
+              style={{ zIndex: isActive ? 50 : baseZIndexes[imageIndex] }}
+              aria-hidden={!isActive}
+            >
+              <img
+                src={item.src}
+                alt={isActive ? item.alt : ""}
+                width={768}
+                height={1024}
+                fetchPriority={imageIndex === 0 ? "high" : "auto"}
+                loading={imageIndex === 0 ? "eager" : "lazy"}
+                className="size-full object-cover"
+              />
+            </div>
+          );
+        })}
 
-      <div className="absolute bottom-4 right-4 z-[60] flex gap-1.5" aria-hidden="true">
-        {heroWork.map((item, index) => (
-          <span
-            key={item.src}
-            className={`h-1.5 rounded-full bg-background/90 shadow-sm transition-[width,opacity] duration-500 ${index === frontIndex ? "w-7 opacity-100" : "w-1.5 opacity-65"}`}
-          />
-        ))}
+        <div className="absolute bottom-4 right-4 z-[60] flex gap-1.5" aria-hidden="true">
+          {heroWork.map((item, index) => (
+            <span
+              key={item.src}
+              className={`h-1.5 rounded-full bg-background/90 shadow-sm transition-[width,opacity] duration-500 ${index === frontIndex ? "w-7 opacity-100" : "w-1.5 opacity-65"}`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
