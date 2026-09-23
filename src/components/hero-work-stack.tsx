@@ -6,36 +6,28 @@ const heroWork = [realWork[2], realWork[7], realWork[3], realWork[9]].filter(
 );
 
 const cardPositions = [
-  "z-40 translate-x-0 translate-y-0 rotate-0 scale-100",
-  "z-30 translate-x-2 translate-y-2 rotate-[0.8deg] scale-[0.985]",
-  "z-20 translate-x-4 translate-y-4 rotate-[1.6deg] scale-[0.97]",
-  "z-10 translate-x-6 translate-y-6 rotate-[2.4deg] scale-[0.955]",
+  "translate-x-0 translate-y-0 rotate-0 scale-100",
+  "translate-x-2 translate-y-2 rotate-[0.8deg] scale-[0.985]",
+  "translate-x-4 translate-y-4 rotate-[1.6deg] scale-[0.97]",
+  "translate-x-6 translate-y-6 rotate-[2.4deg] scale-[0.955]",
 ];
+
+const baseZIndexes = [40, 30, 20, 10];
 
 export function HeroWorkStack() {
   const [frontIndex, setFrontIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [isCycling, setIsCycling] = useState(false);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (isPaused || isCycling || reducedMotion.matches || heroWork.length < 2) return;
+    if (isPaused || reducedMotion.matches || heroWork.length < 2) return;
 
-    const timer = window.setTimeout(() => setIsCycling(true), 3200);
-
-    return () => window.clearInterval(timer);
-  }, [frontIndex, isCycling, isPaused]);
-
-  useEffect(() => {
-    if (!isCycling) return;
-
-    const timer = window.setTimeout(() => {
+    const interval = window.setInterval(() => {
       setFrontIndex((current) => (current + 1) % heroWork.length);
-      setIsCycling(false);
-    }, 1100);
+    }, 4000);
 
-    return () => window.clearTimeout(timer);
-  }, [isCycling]);
+    return () => window.clearInterval(interval);
+  }, [isPaused]);
 
   return (
     <div
@@ -47,25 +39,22 @@ export function HeroWorkStack() {
       onBlur={() => setIsPaused(false)}
       tabIndex={0}
     >
-      <span className="absolute -left-3 top-8 z-50 -rotate-3 rounded-sm bg-accent px-3 py-2 text-xs font-semibold shadow-sm sm:-left-6 sm:text-sm">
+      <span className="absolute -left-3 top-8 z-[60] -rotate-3 rounded-sm bg-accent px-3 py-2 text-xs font-semibold shadow-sm sm:-left-6 sm:text-sm">
         made from memories
       </span>
 
       {heroWork.map((item, imageIndex) => {
-        const position = (imageIndex - frontIndex + heroWork.length) % heroWork.length;
-        const movingTo = isCycling && position > 0 ? position - 1 : position;
-        const motionClass = isCycling && position === 0
-          ? "hero-card-to-back z-50"
-          : cardPositions[movingTo];
+        const isActive = imageIndex === frontIndex;
         return (
           <div
             key={item.src}
-            className={`absolute inset-0 origin-bottom-left overflow-hidden bg-muted transition-[transform,opacity] duration-1000 ease-[cubic-bezier(.22,.8,.22,1)] motion-reduce:transition-none ${motionClass}`}
-            aria-hidden={position !== 0}
+            className={`absolute inset-0 origin-bottom-left overflow-hidden bg-muted transition-opacity duration-700 ease-[cubic-bezier(.4,0,.2,1)] motion-reduce:transition-none ${cardPositions[imageIndex]} ${isActive ? "opacity-100" : "opacity-35"}`}
+            style={{ zIndex: isActive ? 50 : baseZIndexes[imageIndex] }}
+            aria-hidden={!isActive}
           >
             <img
               src={item.src}
-              alt={position === 0 ? item.alt : ""}
+              alt={isActive ? item.alt : ""}
               width={768}
               height={1024}
               fetchPriority={imageIndex === 0 ? "high" : "auto"}
@@ -76,7 +65,7 @@ export function HeroWorkStack() {
         );
       })}
 
-      <div className="absolute bottom-4 right-4 z-50 flex gap-1.5" aria-hidden="true">
+      <div className="absolute bottom-4 right-4 z-[60] flex gap-1.5" aria-hidden="true">
         {heroWork.map((item, index) => (
           <span
             key={item.src}
