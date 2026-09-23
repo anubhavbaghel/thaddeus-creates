@@ -30,20 +30,32 @@ export function HeroWorkStack() {
   }, [isPaused]);
 
   return (
-    <div
-      className="hero-frame group relative aspect-[1.22/1] isolate"
-      aria-label="A rotating selection of real handmade work"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onFocus={() => setIsPaused(true)}
-      onBlur={() => setIsPaused(false)}
-      tabIndex={0}
-    >
-      <span className="absolute -left-3 top-8 z-[60] -rotate-3 rounded-sm bg-accent px-3 py-2 text-xs font-semibold shadow-sm sm:-left-6 sm:text-sm">
-        made from memories
-      </span>
+    <div className="relative">
+      <div className="absolute -top-9 left-4 z-[70] flex items-center gap-1.5 rounded-full bg-background/95 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-foreground shadow-sm backdrop-blur-sm sm:-top-10 sm:px-3.5 sm:py-2 sm:text-xs">
+        <span className="text-primary" aria-hidden="true">♥</span>
+        <span className="relative">
+          {heroWork.map((item, index) => (
+            <span
+              key={item.src}
+              className={`transition-opacity duration-700 ease-[cubic-bezier(.4,0,.2,1)] motion-reduce:transition-none ${index === frontIndex ? "opacity-100" : "absolute inset-0 opacity-0"}`}
+              aria-hidden={index !== frontIndex}
+            >
+              {item.label}
+            </span>
+          ))}
+        </span>
+      </div>
 
-      {heroWork.map((item, imageIndex) => {
+      <div
+        className="hero-frame group relative aspect-[1.22/1] isolate"
+        aria-label="A rotating selection of real handmade work"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onFocus={() => setIsPaused(true)}
+        onBlur={() => setIsPaused(false)}
+        tabIndex={0}
+      >
+        {heroWork.map((item, imageIndex) => {
         const isActive = imageIndex === frontIndex;
         return (
           <div
