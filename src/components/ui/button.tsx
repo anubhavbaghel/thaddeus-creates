@@ -17,7 +17,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         tactile:
-          "relative rounded-2xl border-2 border-foreground bg-secondary px-6 py-3 font-semibold text-secondary-foreground shadow-[4px_4px_0px_0px_var(--color-foreground)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_var(--color-foreground)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
+          "relative rounded-2xl border-2 border-foreground bg-primary px-6 py-3 font-semibold text-primary-foreground shadow-[4px_4px_0px_0px_var(--color-foreground)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_var(--color-foreground)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none",
         "tactile-ink":
           "rounded-full border-2 border-foreground bg-foreground px-6 py-3 font-semibold text-background shadow-[0_8px_20px_-8px_color-mix(in_oklab,var(--color-foreground)_40%,transparent)] transition-all hover:translate-y-0.5 hover:shadow-none",
       },
