@@ -8,3 +8,4 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+- Site images live in public/images/ and are referenced by plain "/images/..." paths (no bundler imports or CDN pointers) — keeps them editable with external tools like Antigravity.
