@@ -5,13 +5,6 @@ const heroWork = [realWork[2], realWork[7], realWork[3], realWork[9]].filter(
   (item): item is NonNullable<typeof item> => Boolean(item),
 );
 
-const cardPositions = [
-  "translate-x-0 translate-y-0 rotate-0 scale-100",
-  "translate-x-2 translate-y-2 rotate-[0.8deg] scale-[0.985]",
-  "translate-x-4 translate-y-4 rotate-[1.6deg] scale-[0.97]",
-  "translate-x-6 translate-y-6 rotate-[2.4deg] scale-[0.955]",
-];
-
 const baseZIndexes = [40, 30, 20, 10];
 
 export function HeroWorkStack() {
@@ -30,7 +23,7 @@ export function HeroWorkStack() {
   }, [isPaused]);
 
   return (
-    <div className="relative">
+    <div className="relative mt-12 lg:mt-0">
       <div className="absolute -top-9 left-4 z-[70] flex items-center gap-1.5 rounded-full bg-background/95 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-foreground shadow-sm backdrop-blur-sm sm:-top-10 sm:px-3.5 sm:py-2 sm:text-xs">
         <span className="text-primary" aria-hidden="true">♥</span>
         <span className="relative">
@@ -60,7 +53,7 @@ export function HeroWorkStack() {
           return (
             <div
               key={item.src}
-              className={`absolute inset-0 origin-bottom-left overflow-hidden bg-muted transition-opacity duration-700 ease-[cubic-bezier(.4,0,.2,1)] motion-reduce:transition-none ${cardPositions[imageIndex]} ${isActive ? "opacity-100" : "opacity-35"}`}
+              className={`absolute inset-0 overflow-hidden bg-muted transition-opacity duration-1000 ease-[cubic-bezier(.4,0,.2,1)] motion-reduce:transition-none ${isActive ? "opacity-100" : "opacity-0"}`}
               style={{ zIndex: isActive ? 50 : baseZIndexes[imageIndex] }}
               aria-hidden={!isActive}
             >
