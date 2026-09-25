@@ -167,8 +167,8 @@ function HomePage() {
               </div>
             </div>
 
-            {/* Featured Artwork / Studio Preview Card */}
-            <div className="relative">
+            {/* Featured Artwork / Studio Preview Card (Desktop Only) */}
+            <div className="relative hidden lg:block">
               <div className="relative overflow-hidden rounded-xl border border-border bg-background p-3 shadow-md">
                 <img
                   src={creations[0]?.image || "/images/resin-frame.jpg"}
