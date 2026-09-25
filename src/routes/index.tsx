@@ -26,7 +26,90 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="border-y border-border bg-card px-5 py-16 sm:px-8 sm:py-24 lg:px-12"><div className="mx-auto max-w-7xl"><div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end"><div><p className="section-kicker">The tiny treasure shelf</p><h2 className="mt-3 max-w-[14ch] font-display text-4xl font-light leading-none sm:text-6xl">Pick a place to begin</h2></div><Link to="/creations" className="inline-flex items-center gap-2 text-sm font-semibold">See every creation <ArrowRight className="size-4" /></Link></div><div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{creations.slice(0, 3).map((creation) => <Link key={creation.slug} to="/creations/$slug" params={{ slug: creation.slug }} className="group"><div className="relative overflow-hidden rounded-lg"><img src={creation.image} alt={creation.imageAlt} width={1200} height={900} loading="lazy" className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.025]" /><div className="absolute bottom-3 left-3 rounded-md bg-background/90 px-2.5 py-1 text-xs font-semibold text-foreground backdrop-blur-sm border border-border/50">{creation.startingPrice}</div></div><div className="flex items-center justify-between pt-4"><h3 className="font-display text-2xl font-medium">{creation.shortName}</h3><ArrowUpRight className="size-5 text-primary" /></div></Link>)}</div></div></section>
+      <section className="border-y border-border bg-card px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+            <div>
+              <p className="section-kicker">Our Handmade Services & Collections</p>
+              <h2 className="mt-3 max-w-[16ch] font-display text-4xl font-light leading-tight sm:text-6xl">
+                Personalised keepsakes for your special moments
+              </h2>
+            </div>
+            <Link to="/creations" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+              Explore full gallery <ArrowRight className="size-4" />
+            </Link>
+          </div>
+
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {creations.map((creation) => (
+              <article key={creation.slug} className="group flex flex-col justify-between overflow-hidden rounded-xl border border-border/80 bg-background transition-all duration-300 hover:shadow-lg">
+                <div>
+                  <div className="relative overflow-hidden bg-muted">
+                    <img
+                      src={creation.image}
+                      alt={creation.imageAlt}
+                      width={1200}
+                      height={900}
+                      loading="lazy"
+                      className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                    <div className="absolute top-3 left-3 rounded-full bg-background/90 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-foreground backdrop-blur-sm border border-border/60">
+                      {creation.category}
+                    </div>
+                    <div className="absolute bottom-3 left-3 rounded-md bg-foreground/90 px-3 py-1 text-xs font-semibold text-background backdrop-blur-sm">
+                      {creation.startingPrice}
+                    </div>
+                  </div>
+
+                  <div className="p-6">
+                    <div className="flex items-center justify-between text-xs text-muted-foreground">
+                      <span>Crafting time: {creation.craftingTime}</span>
+                    </div>
+
+                    <h3 className="mt-2 font-display text-2xl font-medium leading-snug group-hover:text-primary transition-colors">
+                      {creation.name}
+                    </h3>
+
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {creation.summary}
+                    </p>
+
+                    <div className="mt-5 flex flex-wrap gap-1.5">
+                      {creation.options.slice(0, 3).map((opt) => (
+                        <span key={opt} className="rounded-md bg-secondary/80 px-2.5 py-1 text-xs font-medium text-secondary-foreground">
+                          {opt}
+                        </span>
+                      ))}
+                      {creation.options.length > 3 && (
+                        <span className="rounded-md bg-secondary/80 px-2 py-1 text-xs font-medium text-muted-foreground">
+                          +{creation.options.length - 3} more
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-t border-border/70 p-4 bg-card/50 flex items-center justify-between">
+                  <Link
+                    to="/contact"
+                    search={{ creation: creation.shortName }}
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+                  >
+                    Customize Order <ArrowUpRight className="size-3.5" />
+                  </Link>
+                  <Link
+                    to="/creations/$slug"
+                    params={{ slug: creation.slug }}
+                    className="text-xs font-medium text-muted-foreground hover:text-foreground"
+                  >
+                    View Details ➔
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="mx-auto grid max-w-7xl gap-14 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-2 lg:gap-24 lg:px-12"><div><p className="section-kicker">Make it unmistakably theirs</p><h2 className="mt-3 max-w-[12ch] font-display text-4xl font-light leading-[1.02] sm:text-6xl">Your story is the finishing touch.</h2><p className="mt-6 max-w-lg leading-7 text-muted-foreground">Bring the photo, the name, the date or even a half-formed idea. Each detail is chosen with you, then made slowly by hand.</p><div className="mt-8 flex flex-wrap gap-2.5">{["Names & dates", "Your photos", "Colour stories", "Flowers & finishes", "Gift wrapping"].map((item) => <span key={item} className="rounded-md border border-border bg-card px-4 py-2 text-sm font-semibold">{item}</span>)}</div></div><div><p className="section-kicker">From hello to handmade</p><ol className="mt-5 border-t border-border">{[["01", "Share your idea", "Tell us who it is for, the occasion and the little details you love."], ["02", "Shape it together", "We align the colours, photos, names and finishing touches with you."], ["03", "Made just for you", "Your piece is crafted by hand and prepared to become part of the moment."]].map(([number, title, copy]) => <li key={number} className="grid grid-cols-[4.5rem_1fr] gap-4 border-b border-border py-6 sm:grid-cols-[5.5rem_1fr]"><span className="font-display text-5xl font-light leading-none text-primary sm:text-6xl">{number}</span><div><h3 className="font-display text-xl font-medium">{title}</h3><p className="mt-1 text-sm leading-6 text-muted-foreground">{copy}</p></div></li>)}</ol></div></section>
 
