@@ -1,7 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight, Flower2, Heart, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroImage from "../assets/thaddeus-hero.jpg";
+const heroImage = "/images/thaddeus-hero.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({ meta: [

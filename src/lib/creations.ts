@@ -1,8 +1,8 @@
-import resinFrame from "../assets/resin-frame.jpg";
-import resinKeychains from "../assets/resin-keychains.jpg";
-import celebrationThali from "../assets/celebration-thali.jpg";
-import cardsInvitations from "../assets/cards-invitations.jpg";
-import satinBouquet from "../assets/satin-bouquet.jpg";
+const resinFrame = "/images/resin-frame.jpg";
+const resinKeychains = "/images/resin-keychains.jpg";
+const celebrationThali = "/images/celebration-thali.jpg";
+const cardsInvitations = "/images/cards-invitations.jpg";
+const satinBouquet = "/images/satin-bouquet.jpg";
 
 export type Creation = {
   slug: string;
