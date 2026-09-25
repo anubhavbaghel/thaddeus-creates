@@ -1,4 +1,4 @@
-import { MessageCircleMore, Quote } from "lucide-react";
+import { MessageCircleMore, Quote, Star } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -13,10 +13,22 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-const reviewPlaceholders = [
-  { number: "01", prompt: "Add a customer’s words about their custom piece here." },
-  { number: "02", prompt: "Add a review about the personalisation or making experience here." },
-  { number: "03", prompt: "Add a note about gifting, the occasion or the finished piece here." },
+const reviews = [
+  {
+    author: "Shimit",
+    text: "I ordered this as a surprise and honestly, it turned out even better than I expected! The detailing and personalised touches were amazing, and she absolutely loved it. Thank you for making the surprise so special!",
+    tag: "Custom Keepsake Order",
+  },
+  {
+    author: "Aarchi",
+    text: "Everything was so beautifully made! The little details, colours, and personalised touches made it feel truly special. It was even more beautiful in person and made such a lovely keepsake.",
+    tag: "Personalised Gift",
+  },
+  {
+    author: "Chitra",
+    text: "Such a beautiful experience from start to finish! The gift was thoughtfully made, perfectly arranged, and looked absolutely gorgeous. You can really see the love and effort behind every creation. Highly recommended!",
+    tag: "Custom Creation",
+  },
 ];
 
 const faqs = [
@@ -59,24 +71,40 @@ export function HomeSocialProof() {
                 Notes from happy moments.
               </h2>
             </div>
-            <p className="max-w-md text-sm leading-6 text-muted-foreground lg:justify-self-end">
-              Sample spaces are ready for genuine customer reviews. Replace them whenever your
-              favourites are ready to share.
-            </p>
+            <div>
+              <div className="flex items-center gap-1 text-amber-500">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="size-4 fill-amber-500" />
+                ))}
+                <span className="ml-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Loved by customers</span>
+              </div>
+              <p className="mt-2 max-w-md text-sm leading-6 text-muted-foreground">
+                Real words from people who trusted us with their special moments and personalised gifts.
+              </p>
+            </div>
           </div>
 
           <Carousel className="mt-10" opts={{ align: "start" }} aria-label="Customer reviews">
             <CarouselContent>
-              {reviewPlaceholders.map((review) => (
-                <CarouselItem key={review.number} className="md:basis-1/2 lg:basis-1/3">
-                  <article className="flex min-h-64 flex-col justify-between rounded-lg border border-border bg-background p-6 sm:p-8">
-                    <Quote className="size-6 text-primary" aria-hidden="true" />
-                    <p className="mt-8 font-display text-2xl font-light leading-snug">
-                      “{review.prompt}”
-                    </p>
-                    <div className="mt-8 flex items-center justify-between border-t border-border pt-4 text-xs font-semibold uppercase text-muted-foreground">
-                      <span>Sample review</span>
-                      <span>{review.number}</span>
+              {reviews.map((review, index) => (
+                <CarouselItem key={review.author} className="md:basis-1/2 lg:basis-1/3">
+                  <article className="flex h-full flex-col justify-between rounded-lg border border-border bg-background p-6 sm:p-8">
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <Quote className="size-6 text-primary" aria-hidden="true" />
+                        <div className="flex gap-0.5 text-amber-500">
+                          {[...Array(5)].map((_, i) => (
+                            <Star key={i} className="size-3.5 fill-amber-500" />
+                          ))}
+                        </div>
+                      </div>
+                      <p className="mt-6 text-base leading-relaxed text-foreground">
+                        “{review.text}”
+                      </p>
+                    </div>
+                    <div className="mt-8 flex items-center justify-between border-t border-border pt-4 text-xs font-semibold text-muted-foreground">
+                      <span className="font-display text-base font-medium text-foreground">{review.author}</span>
+                      <span className="uppercase text-muted-foreground/80">0{index + 1}</span>
                     </div>
                   </article>
                 </CarouselItem>
