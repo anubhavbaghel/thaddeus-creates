@@ -1,13 +1,13 @@
-import resinCoasters from "@/assets/real-work/resin-flower-coasters.webp.asset.json";
-import redRoseBouquet from "@/assets/real-work/red-rose-newspaper-bouquet.webp.asset.json";
-import heldRoseBouquet from "@/assets/real-work/red-rose-bouquet-held.webp.asset.json";
-import birthdayBouquet from "@/assets/real-work/birthday-photo-bouquet.webp.asset.json";
-import resinFlowerPiece from "@/assets/real-work/pressed-flower-resin-piece.webp.asset.json";
-import chocolateBouquet from "@/assets/real-work/chocolate-photo-satin-bouquet.webp.asset.json";
-import satinRoseBouquet from "@/assets/real-work/red-satin-rose-bouquet.webp.asset.json";
-import familyFrame from "@/assets/real-work/family-photo-resin-frame.webp.asset.json";
-import personalisedKeepsake from "@/assets/real-work/personalised-resin-keepsake.jpg.asset.json";
-import blushResinPiece from "@/assets/real-work/blush-floral-resin-piece.jpg.asset.json";
+const resinCoasters = { url: "/images/real-work/resin-flower-coasters.webp" };
+const redRoseBouquet = { url: "/images/real-work/red-rose-newspaper-bouquet.webp" };
+const heldRoseBouquet = { url: "/images/real-work/red-rose-bouquet-held.webp" };
+const birthdayBouquet = { url: "/images/real-work/birthday-photo-bouquet.webp" };
+const resinFlowerPiece = { url: "/images/real-work/pressed-flower-resin-piece.webp" };
+const chocolateBouquet = { url: "/images/real-work/chocolate-photo-satin-bouquet.webp" };
+const satinRoseBouquet = { url: "/images/real-work/red-satin-rose-bouquet.webp" };
+const familyFrame = { url: "/images/real-work/family-photo-resin-frame.webp" };
+const personalisedKeepsake = { url: "/images/real-work/personalised-resin-keepsake.jpg" };
+const blushResinPiece = { url: "/images/real-work/blush-floral-resin-piece.jpg" };
 
 export type RealWorkItem = {
   src: string;
