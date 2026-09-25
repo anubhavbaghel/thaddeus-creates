@@ -127,7 +127,7 @@ export function SiteHeader() {
             <Link to="/about" className="mobile-main-link" activeProps={{ className: "text-secondary-foreground" }} onClick={() => setOpen(false)}><span>Our story</span><span className="text-primary">03</span></Link>
             <Link to="/contact" className="mobile-main-link border-b border-border" activeProps={{ className: "text-secondary-foreground" }} onClick={() => setOpen(false)}><span>Enquire</span><span className="text-primary">04</span></Link>
             <div className="mt-auto flex items-end justify-between gap-6 pt-10">
-              <p className="max-w-48 text-[0.65rem] font-medium uppercase leading-relaxed text-muted-foreground">Made by hand, made with heart</p>
+              <p className="max-w-48 text-xs font-semibold uppercase leading-relaxed text-muted-foreground">Made by hand, made with heart</p>
               <div className="flex items-center gap-4">
                 <a href="https://wa.me/919654435911?text=Hi%20Thaddeus%20Creates,%20I'm%20interested%20in%20a%20custom%20keepsake" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-sm font-medium text-foreground" aria-label="Chat on WhatsApp">
                   <img src="/whatsapp-svgrepo-com.svg" alt="" className="size-4 shrink-0" /> WhatsApp
