@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, ChevronDown, Heart, Instagram, Menu, X } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Heart, Instagram, MessageCircle, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -87,9 +87,12 @@ export function SiteHeader() {
 
         <div className="justify-self-start md:justify-self-center"><Wordmark onClick={() => setOpen(false)} /></div>
 
-        <nav className="hidden items-center justify-end gap-8 md:flex" aria-label="Secondary navigation">
+        <nav className="hidden items-center justify-end gap-6 md:flex" aria-label="Secondary navigation">
           <Link to="/about" className="atelier-nav-link" activeProps={{ className: "atelier-nav-link-active" }}>Our story</Link>
           <Link to="/contact" className="atelier-nav-link" activeProps={{ className: "atelier-nav-link-active" }}>Enquire</Link>
+          <a href="https://wa.me/919654435911?text=Hi%20Thaddeus%20Creates,%20I'm%20interested%20in%20a%20custom%20keepsake" target="_blank" rel="noreferrer" className="text-muted-foreground transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring" aria-label="Chat on WhatsApp">
+            <img src="/whatsapp-svgrepo-com.svg" alt="" className="size-[1.1rem] shrink-0" />
+          </a>
           <a href="https://www.instagram.com/thaddeus_creates/" target="_blank" rel="noreferrer" className="text-muted-foreground transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring" aria-label="Follow thaddeus creates on Instagram">
             <Instagram className="size-[1.1rem]" strokeWidth={1.6} />
           </a>
@@ -125,9 +128,14 @@ export function SiteHeader() {
             <Link to="/contact" className="mobile-main-link border-b border-border" activeProps={{ className: "text-secondary-foreground" }} onClick={() => setOpen(false)}><span>Enquire</span><span className="text-primary">04</span></Link>
             <div className="mt-auto flex items-end justify-between gap-6 pt-10">
               <p className="max-w-48 text-[0.65rem] font-medium uppercase leading-relaxed text-muted-foreground">Made by hand, made with heart</p>
-              <a href="https://www.instagram.com/thaddeus_creates/" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-medium text-foreground" aria-label="Follow thaddeus creates on Instagram">
-                <Instagram className="size-4 text-primary" /> Instagram
-              </a>
+              <div className="flex items-center gap-4">
+                <a href="https://wa.me/919654435911?text=Hi%20Thaddeus%20Creates,%20I'm%20interested%20in%20a%20custom%20keepsake" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-sm font-medium text-foreground" aria-label="Chat on WhatsApp">
+                  <img src="/whatsapp-svgrepo-com.svg" alt="" className="size-4 shrink-0" /> WhatsApp
+                </a>
+                <a href="https://www.instagram.com/thaddeus_creates/" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-sm font-medium text-foreground" aria-label="Follow thaddeus creates on Instagram">
+                  <Instagram className="size-4 text-primary" /> Instagram
+                </a>
+              </div>
             </div>
           </nav>
         </div>

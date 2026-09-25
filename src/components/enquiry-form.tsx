@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Check, Loader2, Send } from "lucide-react";
 import { z } from "zod";
 import { toast } from "sonner";
@@ -27,6 +27,27 @@ export function EnquiryForm() {
   const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({});
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
+  const [selectedCreation, setSelectedCreation] = useState<string>("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const creationParam = params.get("creation");
+      if (creationParam) {
+        const match = creations.find(
+          (c) =>
+            c.shortName.toLowerCase() === creationParam.toLowerCase() ||
+            c.slug.toLowerCase() === creationParam.toLowerCase() ||
+            c.name.toLowerCase() === creationParam.toLowerCase()
+        );
+        if (match) {
+          setSelectedCreation(match.shortName);
+        } else {
+          setSelectedCreation(creationParam);
+        }
+      }
+    }
+  }, []);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -127,13 +148,14 @@ export function EnquiryForm() {
           <select
             id="creation"
             name="creation"
-            defaultValue=""
+            value={selectedCreation}
+            onChange={(e) => setSelectedCreation(e.target.value)}
             className="mt-2 h-11 w-full rounded-lg border border-border bg-background px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
           >
             <option value="">Not sure yet</option>
             {creations.map((creation) => (
               <option key={creation.slug} value={creation.shortName}>
-                {creation.shortName}
+                {creation.shortName} ({creation.startingPrice})
               </option>
             ))}
             <option value="Something else">Something else</option>
@@ -154,7 +176,7 @@ export function EnquiryForm() {
       </div>
 
       <Button type="submit" variant="tactile" size="lg" className="mt-8 w-full sm:w-auto" disabled={submitting}>
-        {submitting ? <><Loader2 className="size-5 animate-spin" /> Sending</> : <>Send enquiry <Send className="size-5" /></>}
+        {submitting ? <><Loader2 className="size-5 animate-spin" /> Sending</> : <>Start custom order <Send className="size-5" /></>}
       </Button>
       <p className="mt-3 text-xs leading-5 text-muted-foreground">
         Your details are only used to reply to this enquiry.

@@ -11,6 +11,8 @@ export type Creation = {
   category: "Resin" | "Paper" | "Bouquets";
   image: string;
   imageAlt: string;
+  startingPrice: string;
+  craftingTime: string;
   summary: string;
   description: string;
   options: string[];
@@ -32,6 +34,8 @@ export const creations: Creation[] = [
     category: "Resin",
     image: resinFrame,
     imageAlt: "Blush resin photo frame with delicate pressed flowers",
+    startingPrice: "From ₹899",
+    craftingTime: "5–7 working days",
     summary: "A favourite photograph held in soft colour, flowers and a glossy resin finish.",
     description: "Designed around a photograph and colour story, each frame becomes a small, personal piece of the occasion.",
     options: ["Photo", "Colour palette", "Pressed flowers", "Name or date", "Finish"],
@@ -66,6 +70,8 @@ export const creations: Creation[] = [
     category: "Resin",
     image: resinKeychains,
     imageAlt: "Pastel resin letter keychains with tiny white flowers",
+    startingPrice: "From ₹299",
+    craftingTime: "3–5 working days",
     summary: "Initials and names made pocket-sized with florals, colour and tiny keepsake details.",
     description: "A little everyday gift customised around a favourite letter, soft colour combination and finishing charm.",
     options: ["Letter or name", "Resin colour", "Flower style", "Gold details", "Charm"],
@@ -100,6 +106,8 @@ export const creations: Creation[] = [
     category: "Resin",
     image: celebrationThali,
     imageAlt: "Blush resin celebration thali with flowers and gold details",
+    startingPrice: "From ₹1,499",
+    craftingTime: "6–8 working days",
     summary: "A ceremonial piece shaped with pressed flowers, delicate colour and meaningful details.",
     description: "Created to complement the colours and feeling of a celebration while keeping the arrangement beautifully personal.",
     options: ["Colour story", "Flower details", "Name or date", "Gold accents", "Arrangement"],
@@ -134,6 +142,8 @@ export const creations: Creation[] = [
     category: "Paper",
     image: cardsInvitations,
     imageAlt: "Handmade floral invitations and occasion cards in blush and green",
+    startingPrice: "From ₹199",
+    craftingTime: "3–5 working days",
     summary: "Layered paper details made to introduce a celebration or hold a message worth keeping.",
     description: "From a single birthday card to a coordinated invitation, paper, colour and small dimensional details come together by hand.",
     options: ["Occasion", "Wording", "Colour palette", "Floral details", "Format"],
@@ -168,6 +178,8 @@ export const creations: Creation[] = [
     category: "Bouquets",
     image: satinBouquet,
     imageAlt: "Satin rose bouquet with chocolates and small photo keepsakes",
+    startingPrice: "From ₹999",
+    craftingTime: "4–6 working days",
     summary: "Satin flowers, favourite treats and photographs gathered into one lasting surprise.",
     description: "A celebratory arrangement that combines permanent blooms with personal photographs and selected treats.",
     options: ["Satin colours", "Photographs", "Chocolate choice", "Message", "Wrapping"],

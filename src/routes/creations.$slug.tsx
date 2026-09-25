@@ -1,5 +1,5 @@
 import { Link, createFileRoute, notFound } from "@tanstack/react-router";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Clock, ShieldCheck, Tag } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { RealWorkCarousel } from "@/components/real-work-carousel";
@@ -85,7 +85,24 @@ function CreationDetail() {
             <p className="section-kicker">{creation.category} · Made to order</p>
             <h1 className="mt-3 font-display text-5xl font-light leading-[0.98] sm:text-7xl">{creation.name}</h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground">{creation.intro}</p>
-            <Button asChild variant="tactile" size="lg" className="mt-8"><Link to="/contact">Start an enquiry <ArrowUpRight className="size-5" /></Link></Button>
+            
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1.5 text-xs font-semibold text-primary">
+                <Tag className="size-3.5" /> {creation.startingPrice}
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
+                <Clock className="size-3.5 text-primary" /> {creation.craftingTime}
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
+                <ShieldCheck className="size-3.5 text-primary" /> Handcrafted to order
+              </span>
+            </div>
+
+            <Button asChild variant="tactile" size="lg" className="mt-8">
+              <Link to="/contact" search={{ creation: creation.shortName }}>
+                Customize this piece <ArrowUpRight className="size-5" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -145,19 +162,47 @@ function CreationDetail() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20 lg:px-12">
+      <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20 lg:px-12 pb-24 sm:pb-20">
         <div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr]">
           <div>
             <p className="section-kicker">Ready when you are</p>
             <p className="mt-4 max-w-sm leading-7 text-muted-foreground">Share the occasion, the date and any photos you would like included, and the design can be planned around them.</p>
-            <Button asChild variant="tactile" size="lg" className="mt-6"><Link to="/contact">Enquire about this piece <ArrowUpRight className="size-5" /></Link></Button>
+            <Button asChild variant="tactile" size="lg" className="mt-6">
+              <Link to="/contact" search={{ creation: creation.shortName }}>
+                Customize this piece ({creation.startingPrice}) <ArrowUpRight className="size-5" />
+              </Link>
+            </Button>
           </div>
           <div>
             <p className="section-kicker">You may also like</p>
-            <div className="mt-5 grid gap-5 sm:grid-cols-2">{related.map((item) => <Link key={item.slug} to="/creations/$slug" params={{ slug: item.slug }} className="group flex gap-4"><img src={item.image} alt="" width={180} height={180} loading="lazy" className="size-24 rounded-md object-cover" /><div><h3 className="font-display text-xl font-medium group-hover:text-primary">{item.shortName}</h3><span className="mt-2 block text-sm text-muted-foreground">View creation</span></div></Link>)}</div>
+            <div className="mt-5 grid gap-5 sm:grid-cols-2">
+              {related.map((item) => (
+                <Link key={item.slug} to="/creations/$slug" params={{ slug: item.slug }} className="group flex gap-4">
+                  <img src={item.image} alt="" width={180} height={180} loading="lazy" className="size-24 rounded-md object-cover" />
+                  <div>
+                    <h3 className="font-display text-xl font-medium group-hover:text-primary">{item.shortName}</h3>
+                    <span className="mt-1 block text-xs font-semibold text-primary">{item.startingPrice}</span>
+                    <span className="mt-1 block text-xs text-muted-foreground">View creation</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
+
+      {/* Sticky Mobile Conversion Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-between border-t border-border/80 bg-background/95 px-4 py-3 shadow-lg backdrop-blur-md sm:hidden">
+        <div>
+          <p className="truncate text-sm font-semibold">{creation.shortName}</p>
+          <p className="text-xs font-semibold text-primary">{creation.startingPrice}</p>
+        </div>
+        <Button asChild size="sm" variant="tactile">
+          <Link to="/contact" search={{ creation: creation.shortName }}>
+            Order now <ArrowUpRight className="size-4" />
+          </Link>
+        </Button>
+      </div>
     </main>
   );
 }
