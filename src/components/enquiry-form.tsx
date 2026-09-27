@@ -94,8 +94,8 @@ export function EnquiryForm() {
       return;
     }
 
-    // Trigger email notification in background
-    sendEnquiryNotificationEmail(parsed.data).catch((err) => {
+    // Trigger email notification in background via server function
+    sendEnquiryNotificationEmail({ data: parsed.data }).catch((err) => {
       console.error("Email notification failed:", err);
     });
 
