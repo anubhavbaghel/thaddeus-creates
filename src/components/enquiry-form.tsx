@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { creations } from "@/lib/creations";
+import { sendEnquiryNotificationEmail } from "@/lib/notifications";
 
 const enquirySchema = z.object({
   name: z.string().trim().min(1, { message: "Please share your name" }).max(100, { message: "Name must be under 100 characters" }),
@@ -92,6 +93,11 @@ export function EnquiryForm() {
       toast.error("Your enquiry could not be sent. Please try again in a moment.");
       return;
     }
+
+    // Trigger email notification in background
+    sendEnquiryNotificationEmail(parsed.data).catch((err) => {
+      console.error("Email notification failed:", err);
+    });
 
     form.reset();
     setSent(true);
