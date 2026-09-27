@@ -125,7 +125,7 @@ export function EnquiryForm() {
       <div className="mt-7 grid gap-5 sm:grid-cols-2">
         <div>
           <Label htmlFor="name">Your name</Label>
-          <Input id="name" name="name" maxLength={100} autoComplete="name" placeholder="Anubhav" className={inputClass} />
+          <Input id="name" name="name" maxLength={100} autoComplete="name" placeholder="Your full name" className={inputClass} />
           {errors.name && <p className="mt-1.5 text-xs text-destructive">{errors.name}</p>}
         </div>
         <div>
