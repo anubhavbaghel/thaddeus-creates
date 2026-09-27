@@ -23,6 +23,13 @@ export const sendEnquiryNotificationEmail = createServerFn({ method: "POST" })
       (typeof process !== "undefined" ? process.env?.VITE_OWNER_EMAIL : undefined) ||
       import.meta.env.VITE_OWNER_EMAIL ||
       (import.meta.env as Record<string, string>)["OWNER_EMAIL"] ||
+      "anubhavbaghel@gmail.com";
+
+    const ccEmail =
+      (typeof process !== "undefined" ? process.env?.CC_EMAIL : undefined) ||
+      (typeof process !== "undefined" ? process.env?.VITE_CC_EMAIL : undefined) ||
+      import.meta.env.VITE_CC_EMAIL ||
+      (import.meta.env as Record<string, string>)["CC_EMAIL"] ||
       "code.anubhavbaghel@gmail.com";
 
     if (!apiKey) {
@@ -31,6 +38,10 @@ export const sendEnquiryNotificationEmail = createServerFn({ method: "POST" })
     }
 
     try {
+      // Build recipients list
+      const toRecipients = [ownerEmail];
+      const ccRecipients = ccEmail && ccEmail !== ownerEmail ? [ccEmail] : undefined;
+
       const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
@@ -39,7 +50,8 @@ export const sendEnquiryNotificationEmail = createServerFn({ method: "POST" })
         },
         body: JSON.stringify({
           from: "thaddeus creates <onboarding@resend.dev>",
-          to: [ownerEmail],
+          to: toRecipients,
+          ...(ccRecipients ? { cc: ccRecipients } : {}),
           reply_to: data.email,
           subject: `✨ New Enquiry from ${data.name} — thaddeus creates`,
           html: `
