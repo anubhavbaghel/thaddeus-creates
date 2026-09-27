@@ -13,7 +13,7 @@ export function Analytics() {
   const currentPath = routerState.location.pathname;
 
   useEffect(() => {
-    const gaId = import.meta.env.VITE_GA_MEASUREMENT_ID;
+    const gaId = import.meta.env.VITE_GA_MEASUREMENT_ID || "G-36F2JL5YX9";
     if (!gaId || typeof window === "undefined" || !window.gtag) return;
 
     window.gtag("config", gaId, {
