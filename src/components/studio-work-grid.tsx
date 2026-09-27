@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { realWork, type RealWorkItem } from "@/lib/real-work";
+import { getGalleryItemWhatsAppLink } from "@/lib/whatsapp";
 
 const galleryCategories = ["All", "Resin", "Bouquets", "Paper"] as const;
 
@@ -49,44 +50,60 @@ export function StudioWorkGrid() {
         </div>
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {visibleItems.map((item, idx) => (
-            <figure
-              key={`${item.src}-${idx}`}
-              className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-border/80 bg-card transition-all duration-300 hover:shadow-lg"
-            >
-              <div className="relative aspect-[3/4] w-full overflow-hidden bg-muted">
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  width={768}
-                  height={1024}
-                  loading={idx < 4 ? "eager" : "lazy"}
-                  className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute top-3 left-3 rounded-full bg-background/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-foreground backdrop-blur-sm border border-border/60">
-                  {item.category}
-                </div>
-              </div>
+          {visibleItems.map((item, idx) => {
+            const whatsappUrl = getGalleryItemWhatsAppLink(item.label, item.category);
 
-              <figcaption className="flex items-center justify-between gap-2 p-4 bg-card border-t border-border/70">
-                <div>
-                  <h3 className="font-display text-base font-medium text-foreground group-hover:text-primary transition-colors">
-                    {item.label}
-                  </h3>
-                  <p className="text-xs text-muted-foreground">1-of-1 Handmade</p>
+            return (
+              <figure
+                key={`${item.src}-${idx}`}
+                className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-border/80 bg-card transition-all duration-300 hover:shadow-lg"
+              >
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-muted">
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    width={768}
+                    height={1024}
+                    loading={idx < 4 ? "eager" : "lazy"}
+                    className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute top-3 left-3 rounded-full bg-background/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-foreground backdrop-blur-sm border border-border/60">
+                    {item.category}
+                  </div>
                 </div>
-                
-                <Link
-                  to="/contact"
-                  search={{ creation: item.label }}
-                  className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-secondary text-secondary-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
-                  aria-label={`Enquire about ${item.label}`}
-                >
-                  <ArrowUpRight className="size-4" />
-                </Link>
-              </figcaption>
-            </figure>
-          ))}
+
+                <figcaption className="flex items-center justify-between gap-2 p-4 bg-card border-t border-border/70">
+                  <div>
+                    <h3 className="font-display text-base font-medium text-foreground group-hover:text-primary transition-colors">
+                      {item.label}
+                    </h3>
+                    <p className="text-xs text-muted-foreground">1-of-1 Handmade</p>
+                  </div>
+                  
+                  <div className="flex items-center gap-1.5">
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+                      aria-label={`Enquire about ${item.label} on WhatsApp`}
+                      title="Enquire on WhatsApp"
+                    >
+                      <img src="/whatsapp-svgrepo-com.svg" alt="" className="size-4 shrink-0" />
+                    </a>
+                    <Link
+                      to="/contact"
+                      search={{ creation: item.label }}
+                      className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-secondary text-secondary-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+                      aria-label={`Enquire about ${item.label}`}
+                    >
+                      <ArrowUpRight className="size-4" />
+                    </Link>
+                  </div>
+                </figcaption>
+              </figure>
+            );
+          })}
         </div>
 
         {hasMore && (
