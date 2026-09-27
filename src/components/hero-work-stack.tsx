@@ -23,8 +23,8 @@ export function HeroWorkStack() {
   }, [isPaused]);
 
   return (
-    <div className="relative mt-12 lg:mt-0">
-      <div className="absolute -top-9 left-4 z-[70] flex items-center gap-1.5 rounded-full bg-background/95 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-foreground shadow-sm backdrop-blur-sm sm:-top-10 sm:px-3.5 sm:py-2 sm:text-xs">
+    <div className="relative isolate mt-12 lg:mt-0">
+      <div className="absolute -top-9 left-4 z-20 flex items-center gap-1.5 rounded-full bg-background/95 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-foreground shadow-sm backdrop-blur-sm sm:-top-10 sm:px-3.5 sm:py-2 sm:text-xs">
         <span className="text-primary" aria-hidden="true">♥</span>
         <span className="relative">
           {heroWork.map((item, index) => (
@@ -40,7 +40,7 @@ export function HeroWorkStack() {
       </div>
 
       <div
-        className="hero-frame group relative aspect-[1.22/1] isolate"
+        className="hero-frame group relative aspect-[1.22/1] isolate z-10"
         aria-label="A rotating selection of real handmade work"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
@@ -70,7 +70,7 @@ export function HeroWorkStack() {
           );
         })}
 
-        <div className="absolute bottom-4 right-4 z-[60] flex gap-1.5" aria-hidden="true">
+        <div className="absolute bottom-4 right-4 z-20 flex gap-1.5" aria-hidden="true">
           {heroWork.map((item, index) => (
             <span
               key={item.src}
