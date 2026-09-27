@@ -10,6 +10,13 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { creations } from "@/lib/creations";
 import { sendEnquiryNotificationEmail } from "@/lib/notifications";
+import { Turnstile } from "@marsidev/react-turnstile";
+import { verifyTurnstileToken } from "@/lib/turnstile";
+
+const turnstileSiteKey =
+  import.meta.env.VITE_TURNSTILE_SITE_KEY ||
+  (import.meta.env as Record<string, string>)["TURNSTILE_SITE_KEY"] ||
+  "1x00000000000000000000AA";
 
 const enquirySchema = z.object({
   name: z.string().trim().min(1, { message: "Please share your name" }).max(100, { message: "Name must be under 100 characters" }),
@@ -29,6 +36,7 @@ export function EnquiryForm() {
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
   const [selectedCreation, setSelectedCreation] = useState<string>("");
+  const [turnstileToken, setTurnstileToken] = useState<string>("");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -55,6 +63,12 @@ export function EnquiryForm() {
     const form = event.currentTarget;
     const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
 
+    // Honeypot check (hidden from human users, bots auto-fill it)
+    if (data["website_hp"]) {
+      setSent(true);
+      return;
+    }
+
     const parsed = enquirySchema.safeParse({
       name: data['name'] ?? "",
       email: data['email'] ?? "",
@@ -77,6 +91,14 @@ export function EnquiryForm() {
 
     setErrors({});
     setSubmitting(true);
+
+    // Verify Cloudflare Turnstile token via server function
+    const turnstileCheck = await verifyTurnstileToken({ data: turnstileToken });
+    if (!turnstileCheck.success) {
+      setSubmitting(false);
+      toast.error(turnstileCheck.error || "Security check failed. Please try again.");
+      return;
+    }
 
     const { error } = await supabase.from("enquiries").insert({
       name: parsed.data.name,
@@ -178,6 +200,22 @@ export function EnquiryForm() {
             className="mt-2 rounded-lg border-border bg-background"
           />
           {errors.message && <p className="mt-1.5 text-xs text-destructive">{errors.message}</p>}
+        </div>
+        {/* Hidden Honeypot Field for Bot Detection (Invisible to human users) */}
+        <div className="sr-only hidden" aria-hidden="true">
+          <label htmlFor="website_hp">Leave this field blank</label>
+          <input type="text" id="website_hp" name="website_hp" tabIndex={-1} autoComplete="off" />
+        </div>
+
+        {/* Cloudflare Turnstile Bot Protection Widget */}
+        <div className="mt-6 sm:col-span-2 flex justify-start">
+          <Turnstile
+            siteKey={turnstileSiteKey}
+            onSuccess={(token) => setTurnstileToken(token)}
+            onExpire={() => setTurnstileToken("")}
+            onError={() => setTurnstileToken("")}
+            options={{ theme: "auto", size: "normal" }}
+          />
         </div>
       </div>
 
