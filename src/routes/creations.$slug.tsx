@@ -6,7 +6,7 @@ import { RealWorkCarousel } from "@/components/real-work-carousel";
 import { creations, getCreation } from "@/lib/creations";
 import { realWork } from "@/lib/real-work";
 
-const SITE = "https://thaddeus-creates.lovable.app";
+const SITE = "https://thaddeuscreates.shop";
 
 export const Route = createFileRoute("/creations/$slug")({
   loader: ({ params }) => {
@@ -19,6 +19,7 @@ export const Route = createFileRoute("/creations/$slug")({
       return { meta: [{ title: "Creation not found | thaddeus creates" }, { name: "robots", content: "noindex" }] };
     }
     const url = `${SITE}/creations/${params.slug}`;
+    const imageUrl = `${SITE}${loaderData.image}`;
     return {
       meta: [
         { title: loaderData.seoTitle },
@@ -27,7 +28,11 @@ export const Route = createFileRoute("/creations/$slug")({
         { property: "og:description", content: loaderData.seoDescription },
         { property: "og:type", content: "article" },
         { property: "og:url", content: url },
+        { property: "og:image", content: imageUrl },
+        { property: "og:image:secure_url", content: imageUrl },
+        { property: "og:image:alt", content: loaderData.name },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: imageUrl },
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [

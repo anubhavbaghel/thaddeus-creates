@@ -7,7 +7,16 @@ export const Route = createFileRoute("/contact")({
   head: () => ({ meta: [
     { title: "Custom Order Enquiry | thaddeus creates" }, { name: "description", content: "Prepare an enquiry for a personalised resin, paper or satin creation from thaddeus creates." },
     { property: "og:title", content: "Custom Order Enquiry | thaddeus creates" }, { property: "og:description", content: "Start shaping a thoughtful handmade gift for your person or occasion." },
-    { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: "https://thaddeuscreates.shop/contact" },
+    { property: "og:image", content: "https://thaddeuscreates.shop/og-image.jpg" },
+    { property: "og:image:secure_url", content: "https://thaddeuscreates.shop/og-image.jpg" },
+    { property: "og:image:type", content: "image/jpeg" },
+    { property: "og:image:width", content: "1200" },
+    { property: "og:image:height", content: "630" },
+    { property: "og:image:alt", content: "Custom Order Enquiry | thaddeus creates" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:image", content: "https://thaddeuscreates.shop/og-image.jpg" },
   ] }), component: ContactPage,
 });
 

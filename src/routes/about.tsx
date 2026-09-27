@@ -7,7 +7,16 @@ export const Route = createFileRoute("/about")({
   head: () => ({ meta: [
     { title: "Our Story | thaddeus creates" }, { name: "description", content: "Discover the thoughtful, personal approach behind every handmade thaddeus creates keepsake." },
     { property: "og:title", content: "Our Story | thaddeus creates" }, { property: "og:description", content: "Small details, meaningful stories and keepsakes made slowly by hand." },
-    { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: "https://thaddeuscreates.shop/about" },
+    { property: "og:image", content: "https://thaddeuscreates.shop/og-image.jpg" },
+    { property: "og:image:secure_url", content: "https://thaddeuscreates.shop/og-image.jpg" },
+    { property: "og:image:type", content: "image/jpeg" },
+    { property: "og:image:width", content: "1200" },
+    { property: "og:image:height", content: "630" },
+    { property: "og:image:alt", content: "Our Story | thaddeus creates" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:image", content: "https://thaddeuscreates.shop/og-image.jpg" },
   ] }), component: AboutPage,
 });
 
