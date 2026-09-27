@@ -55,6 +55,7 @@ export function SiteHeader() {
       <div className="relative mx-auto grid h-[4.75rem] max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 sm:px-8 md:h-[5.75rem] md:grid-cols-[1fr_auto_1fr] lg:px-12">
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary navigation">
           <Link to="/" activeOptions={{ exact: true }} className="atelier-nav-link" activeProps={{ className: "atelier-nav-link-active" }}>Home</Link>
+          <Link to="/shop" className="atelier-nav-link" activeProps={{ className: "atelier-nav-link-active" }}>Shop</Link>
           <DropdownMenu>
             <DropdownMenuTrigger className="atelier-nav-link group flex items-center gap-1.5 data-[state=open]:text-foreground">
               Creations <ChevronDown className="size-3.5 transition-transform duration-300 group-data-[state=open]:rotate-180" aria-hidden="true" />
@@ -69,7 +70,10 @@ export function SiteHeader() {
               </div>
               <div className="p-2">
                 <DropdownMenuItem asChild className="rounded-md px-3 py-2.5 font-medium">
-                  <Link to="/creations" className="flex items-center justify-between">All creations <ArrowUpRight className="size-4 text-primary" /></Link>
+                  <Link to="/creations" className="flex items-center justify-between">Studio Gallery <ArrowUpRight className="size-4 text-primary" /></Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="rounded-md px-3 py-2.5 font-medium">
+                  <Link to="/shop" className="flex items-center justify-between text-primary">Shop Options <ArrowUpRight className="size-4" /></Link>
                 </DropdownMenuItem>
                 <div className="my-1 h-px bg-border" />
                 {creations.map((creation, index) => (
@@ -113,10 +117,13 @@ export function SiteHeader() {
             <Link to="/" activeOptions={{ exact: true }} className="mobile-main-link" activeProps={{ className: "text-secondary-foreground" }} onClick={() => setOpen(false)}>
               <span>Home</span><span className="text-primary">01</span>
             </Link>
+            <Link to="/shop" className="mobile-main-link border-t border-border" activeProps={{ className: "text-secondary-foreground" }} onClick={() => setOpen(false)}>
+              <span>Shop</span><span className="text-primary">02</span>
+            </Link>
             <div className="border-y border-border py-5">
               <div className="mb-4 flex items-end justify-between">
-                <Link to="/creations" className="font-display text-2xl font-light text-foreground" onClick={() => setOpen(false)}>Creations</Link>
-                <span className="text-xs text-muted-foreground">02</span>
+                <Link to="/creations" className="font-display text-2xl font-light text-foreground" onClick={() => setOpen(false)}>Studio Gallery</Link>
+                <span className="text-xs text-muted-foreground">03</span>
               </div>
               <div className="grid gap-1 border-l border-primary/70 pl-4">
                 {creations.map((creation) => (
@@ -124,8 +131,8 @@ export function SiteHeader() {
                 ))}
               </div>
             </div>
-            <Link to="/about" className="mobile-main-link" activeProps={{ className: "text-secondary-foreground" }} onClick={() => setOpen(false)}><span>Our story</span><span className="text-primary">03</span></Link>
-            <Link to="/contact" className="mobile-main-link border-b border-border" activeProps={{ className: "text-secondary-foreground" }} onClick={() => setOpen(false)}><span>Enquire</span><span className="text-primary">04</span></Link>
+            <Link to="/about" className="mobile-main-link" activeProps={{ className: "text-secondary-foreground" }} onClick={() => setOpen(false)}><span>Our story</span><span className="text-primary">04</span></Link>
+            <Link to="/contact" className="mobile-main-link border-b border-border" activeProps={{ className: "text-secondary-foreground" }} onClick={() => setOpen(false)}><span>Enquire</span><span className="text-primary">05</span></Link>
             <div className="mt-auto flex items-end justify-between gap-6 pt-10">
               <p className="max-w-48 text-xs font-semibold uppercase leading-relaxed text-muted-foreground">Made by hand, made with heart</p>
               <div className="flex items-center gap-4">

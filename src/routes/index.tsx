@@ -32,7 +32,29 @@ function HomePage() {
     <main className="overflow-hidden">
       <section className="mx-auto max-w-7xl px-5 pb-16 pt-10 sm:px-8 sm:pt-14 lg:px-12 lg:pb-24">
         <div className="grid items-end gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:gap-14">
-          <div className="relative z-10 pb-2"><p className="section-kicker flex items-center gap-2"><span className="size-2 rounded-full bg-primary" /> Handmade, one at a time</p><h1 className="mt-6 max-w-[10ch] font-display text-[clamp(3.5rem,11vw,6.8rem)] font-light leading-[0.91]">Little things, made <span className="ink-swish">all yours.</span></h1><p className="mt-7 max-w-md text-base leading-7 text-muted-foreground sm:text-lg">Resin, paper and satin keepsakes shaped around your people, your stories and your happiest days.</p><Button asChild variant="tactile" size="xl" className="mt-8"><Link to="/creations">Explore custom keepsakes <ArrowUpRight className="size-5" /></Link></Button></div>
+          <div className="relative z-10 pb-2">
+            <p className="section-kicker flex items-center gap-2">
+              <span className="size-2 rounded-full bg-primary" /> Handmade, one at a time
+            </p>
+            <h1 className="mt-6 max-w-[10ch] font-display text-[clamp(3.5rem,11vw,6.8rem)] font-light leading-[0.91]">
+              Little things, made <span className="ink-swish">all yours.</span>
+            </h1>
+            <p className="mt-7 max-w-md text-base leading-7 text-muted-foreground sm:text-lg">
+              Resin, paper and satin keepsakes shaped around your people, your stories and your happiest days.
+            </p>
+            <div className="mt-8 flex flex-col gap-3.5 sm:flex-row sm:items-center">
+              <Button asChild variant="tactile" size="xl">
+                <Link to="/shop">
+                  Shop Keepsakes <ArrowUpRight className="size-5" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="xl" className="border-border bg-card text-foreground hover:bg-accent">
+                <Link to="/creations">
+                  Explore Gallery <ArrowRight className="size-5" />
+                </Link>
+              </Button>
+            </div>
+          </div>
           <HeroWorkStack />
         </div>
       </section>
@@ -46,8 +68,8 @@ function HomePage() {
                 Personalised keepsakes for your special moments
               </h2>
             </div>
-            <Link to="/creations" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
-              Explore full gallery <ArrowRight className="size-4" />
+            <Link to="/shop" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+              View all shop options <ArrowRight className="size-4" />
             </Link>
           </div>
 
