@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { CreationCard } from "@/components/creation-card";
+import { StudioWorkGrid } from "@/components/studio-work-grid";
 import { Button } from "@/components/ui/button";
 import { categories, creations } from "@/lib/creations";
 
@@ -35,6 +36,7 @@ function CreationsPage() {
         <div className="mt-10 flex flex-wrap gap-2" aria-label="Filter creations">{categories.map((item) => <Button key={item} variant={category === item ? "default" : "outline"} onClick={() => setCategory(item)} aria-pressed={category === item}>{item}</Button>)}</div>
       </section>
       <section className="border-t border-border bg-card px-5 py-14 sm:px-8 sm:py-20 lg:px-12"><div className="mx-auto grid max-w-7xl gap-x-6 gap-y-14 sm:grid-cols-2">{filtered.map((creation, index) => <CreationCard key={creation.slug} creation={creation} priority={index < 2} />)}</div></section>
+      <StudioWorkGrid />
     </main>
   );
 }
