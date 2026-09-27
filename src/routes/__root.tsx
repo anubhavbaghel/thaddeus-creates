@@ -109,6 +109,29 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "thaddeus creates",
+          image: "https://thaddeuscreates.shop/og-image.jpg",
+          logo: "https://thaddeuscreates.shop/logo.png",
+          url: "https://thaddeuscreates.shop",
+          telephone: "+919654435911",
+          priceRange: "₹199 - ₹2499",
+          description: "Handmade gifting studio specializing in custom resin photo frames, keychains, celebration thalis, occasion cards and satin flower bouquets.",
+          address: {
+            "@type": "PostalAddress",
+            addressCountry: "IN"
+          },
+          sameAs: [
+            "https://www.instagram.com/thaddeus_creates/"
+          ]
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
