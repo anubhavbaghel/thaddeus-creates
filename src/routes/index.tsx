@@ -24,7 +24,43 @@ export const Route = createFileRoute("/")({
     { name: "twitter:title", content: "thaddeus creates | Personalised Handmade Keepsakes" },
     { name: "twitter:description", content: "Custom resin frames, keychains, thalis, invitations, occasion cards and satin flower bouquets, handmade for your moments." },
     { name: "twitter:image", content: "https://thaddeuscreates.shop/og-image.jpg" },
-  ] }), component: HomePage,
+  ],
+  scripts: [
+    {
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "How are thaddeus creates handmade gifts customized?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Each piece is crafted around your photographs, preferred colour story, names, dates and personal details. We align design choices with you 1-on-1 before anything is poured or crafted.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "How long does crafting and delivery take?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Crafting time typically takes 3 to 7 working days depending on curing times for resin and assembly for satin bouquets or cards.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "How do I order a custom keepsake?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "You can start an enquiry on thaddeuscreates.shop or chat directly on WhatsApp (+91 9654435911) with your photo and idea.",
+            },
+          },
+        ],
+      }),
+    },
+  ],
+  }), component: HomePage,
 });
 
 function HomePage() {

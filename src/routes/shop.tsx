@@ -19,9 +19,25 @@ export const Route = createFileRoute("/shop")({
       { property: "og:image:type", content: "image/jpeg" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Shop Custom Keepsakes | thaddeus creates" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: "https://thaddeuscreates.shop/og-image.jpg" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Handmade Custom Keepsakes & Services",
+          itemListElement: creations.map((creation, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: creation.name,
+            description: creation.summary,
+            url: `https://thaddeuscreates.shop/creations/${creation.slug}`,
+          })),
+        }),
+      },
     ],
   }),
   component: ShopPage,
