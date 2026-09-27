@@ -1,6 +1,23 @@
 import { useState, useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
+
+const verifyPasscodeServer = createServerFn({ method: "POST" })
+  .validator((passcode: string) => passcode)
+  .handler(async ({ data: passcode }) => {
+    const secretPassword =
+      (typeof process !== "undefined" ? process.env?.ADMIN_PASSWORD : undefined) ||
+      (typeof process !== "undefined" ? process.env?.VITE_ADMIN_PASSWORD : undefined) ||
+      import.meta.env.VITE_ADMIN_PASSWORD ||
+      (import.meta.env as Record<string, string>)["ADMIN_PASSWORD"] ||
+      "thaddeus2026";
+
+    if (passcode === secretPassword) {
+      return { success: true };
+    }
+    return { success: false, error: "Incorrect passcode" };
+  });
 import type { Tables } from "@/integrations/supabase/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -95,21 +112,34 @@ function AdminDashboard() {
     }
   }
 
-  function handleLogin(e: React.FormEvent) {
+  async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
-    const correctPassword =
-      import.meta.env.VITE_ADMIN_PASSWORD ||
-      (import.meta.env as Record<string, string>)["ADMIN_PASSWORD"] ||
-      "thaddeus2026";
+    try {
+      const res = await verifyPasscodeServer({ data: passcode });
+      if (res.success) {
+        setIsAuthenticated(true);
+        sessionStorage.setItem("thaddeus_admin_auth", "true");
+        setLoginError("");
+        toast.success("Welcome to Owner Dashboard");
+      } else {
+        setLoginError("Incorrect passcode. Please try again.");
+        toast.error("Access denied");
+      }
+    } catch {
+      const correctPassword =
+        import.meta.env.VITE_ADMIN_PASSWORD ||
+        (import.meta.env as Record<string, string>)["ADMIN_PASSWORD"] ||
+        "thaddeus2026";
 
-    if (passcode === correctPassword) {
-      setIsAuthenticated(true);
-      sessionStorage.setItem("thaddeus_admin_auth", "true");
-      setLoginError("");
-      toast.success("Welcome to Owner Dashboard");
-    } else {
-      setLoginError("Incorrect passcode. Please try again.");
-      toast.error("Access denied");
+      if (passcode === correctPassword) {
+        setIsAuthenticated(true);
+        sessionStorage.setItem("thaddeus_admin_auth", "true");
+        setLoginError("");
+        toast.success("Welcome to Owner Dashboard");
+      } else {
+        setLoginError("Incorrect passcode. Please try again.");
+        toast.error("Access denied");
+      }
     }
   }
 
