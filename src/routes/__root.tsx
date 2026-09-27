@@ -82,6 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "author", content: "thaddeus creates" },
+      { name: "google-site-verification", content: "googlebda73efd5e2e1365" },
       { property: "og:site_name", content: "thaddeus creates" },
       { property: "og:type", content: "website" },
       { property: "og:title", content: "thaddeus creates | Personalised Handmade Keepsakes" },
