@@ -97,7 +97,10 @@ function AdminDashboard() {
 
   function handleLogin(e: React.FormEvent) {
     e.preventDefault();
-    const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD || "thaddeus2026";
+    const correctPassword =
+      import.meta.env.VITE_ADMIN_PASSWORD ||
+      (import.meta.env as Record<string, string>)["ADMIN_PASSWORD"] ||
+      "thaddeus2026";
 
     if (passcode === correctPassword) {
       setIsAuthenticated(true);

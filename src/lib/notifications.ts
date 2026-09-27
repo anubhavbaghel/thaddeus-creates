@@ -8,8 +8,16 @@ export interface EnquiryNotificationData {
 }
 
 export async function sendEnquiryNotificationEmail(data: EnquiryNotificationData) {
-  const apiKey = import.meta.env.VITE_RESEND_API_KEY || (typeof process !== "undefined" ? process.env?.RESEND_API_KEY : undefined);
-  const ownerEmail = import.meta.env.VITE_OWNER_EMAIL || "anubhavbaghel@gmail.com";
+  const apiKey =
+    import.meta.env.VITE_RESEND_API_KEY ||
+    (import.meta.env as Record<string, string>)["RESEND_API_KEY"] ||
+    (typeof process !== "undefined" ? process.env?.RESEND_API_KEY : undefined);
+
+  const ownerEmail =
+    import.meta.env.VITE_OWNER_EMAIL ||
+    (import.meta.env as Record<string, string>)["OWNER_EMAIL"] ||
+    (typeof process !== "undefined" ? process.env?.OWNER_EMAIL : undefined) ||
+    "anubhavbaghel@gmail.com";
 
   if (!apiKey) {
     console.warn("[Notifications] VITE_RESEND_API_KEY is missing in environment variables. Email notification will trigger once API key is added.");
